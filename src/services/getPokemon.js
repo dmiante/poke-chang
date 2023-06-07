@@ -1,12 +1,11 @@
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon'
 
-export const getAllPokemon = async () => {
-  const response = await fetch(`${BASE_URL}?limit=12&offset=0`)
+export async function getAllPokemon ({ limit = 12, offSet = 0 } = {}) {
+  const response = await fetch(`${BASE_URL}?limit=${limit}&offset=${offSet}`)
   const data = await response.json()
   if (!response.ok) {
-    const error = new Error('An error occurred while fetching the data.')
+    const error = new Error('Error HTTP: ' + response.status)
     throw error
   }
-  const { results } = data
-  return results
+  return { data }
 }

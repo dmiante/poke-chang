@@ -7,7 +7,7 @@ function App () {
     <>
       <Header />
       <main className='flex flex-col items-center'>
-        <h1 className='font-flexo font-normal text-6xl'>PokePang</h1>
+        <h1 className='font-flexo font-normal text-6xl'>PokeChang</h1>
         <SearchBar />
         <ListPokemon />
       </main>

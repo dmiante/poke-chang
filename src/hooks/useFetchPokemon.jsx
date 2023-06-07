@@ -6,6 +6,10 @@ export const useFetchPokemon = ({ url }) => {
   const fetchPokemon = async () => {
     if (url) {
       const resp = await fetch(url)
+      if (!resp.ok) {
+        const error = new Error('Error HTTP: ' + resp.status)
+        throw error
+      }
       const data = await resp.json()
       setDataPokemon(data)
     }
