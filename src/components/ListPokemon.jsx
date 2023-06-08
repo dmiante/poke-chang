@@ -1,26 +1,16 @@
-import { useState, useEffect } from 'react'
-import { getAllPokemon } from '../services/getPokemon'
 import { PokemonItem } from './PokemonItem'
+import { usePokemon } from '../hooks/usePokemon'
 
 export function ListPokemon () {
-  const [allPokemon, setAllPokemon] = useState([])
-
-  const loadPokemon = async () => {
-    try {
-      const newPoke = await getAllPokemon()
-      const { data } = newPoke
-      setAllPokemon(data)
-    } catch (error) {
-      throw new Error(error)
-    }
-  }
+  const { pokemon, setPokemon, page, setPage } = usePokemon()
 
   const nextPage = async () => {
-    const nextUrl = allPokemon.next
     try {
-      const newPage = await fetch(nextUrl)
+      const newPage = await fetch(page)
       const loadNextPage = await newPage.json()
-      setAllPokemon(loadNextPage)
+      setPage(loadNextPage.next)
+      const loadMore = [...pokemon, loadNextPage.results].flat()
+      setPokemon(loadMore)
     } catch (error) {
       console.log(error)
     }
@@ -30,17 +20,13 @@ export function ListPokemon () {
     nextPage()
   }
 
-  useEffect(() => {
-    loadPokemon()
-  }, [])
-
   return (
     <>
       <ul className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-5 mx-2'>
         {
-          allPokemon?.results
+          pokemon
             ? (
-                allPokemon?.results?.map((pokemon) => {
+                pokemon?.map((pokemon) => {
                   return (
                     <PokemonItem key={pokemon.name} {...pokemon} />
                   )

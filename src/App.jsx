@@ -1,5 +1,6 @@
 import { ListPokemon } from './components/ListPokemon'
 import { SearchBar } from './components/SearchBar'
+import { PokemonContextProvider } from './context/PokemonContext'
 import { Header } from './layout/Header'
 
 function App () {
@@ -9,7 +10,9 @@ function App () {
       <main className='flex flex-col items-center'>
         <h1 className='font-flexo font-normal text-6xl'>PokeChang</h1>
         <SearchBar />
-        <ListPokemon />
+        <PokemonContextProvider>
+          <ListPokemon />
+        </PokemonContextProvider>
       </main>
     </>
   )
