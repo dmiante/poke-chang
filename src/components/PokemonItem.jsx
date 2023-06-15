@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useFetchPokemon } from '../hooks/useFetchPokemon'
 
 export function PokemonItem ({ url }) {
@@ -8,22 +9,24 @@ export function PokemonItem ({ url }) {
       {
         dataPokemon
           ? (
-            <li
-              className='flex flex-col items-center'
+            <Link
+              to={`/${dataPokemon.name}`}
+              className='flex flex-col items-center cursor-pointer hover:bg-slate-100'
             >
               <img
+                loading='lazy'
                 src={dataPokemon.sprites.other['official-artwork'].front_default}
                 alt={dataPokemon.name}
-                className='w-max'
+                className='w-3/4'
               />
               <h2
-                className='font-flexo text-3xl font-normal capitalize'
+                className='text-3xl font-normal capitalize font-flexo'
               >
                 {dataPokemon.name}
               </h2>
-            </li>
+            </Link>
             )
-          : <p>Cargando...</p>
+          : <p>Loading...</p>
       }
     </>
   )

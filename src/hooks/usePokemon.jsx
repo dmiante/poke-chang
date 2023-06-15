@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
-import { getAllPokemon } from '../services/getPokemon'
+import { getAllPokemon } from '../services/getAllPokemon'
 import PokemonContext from '../context/PokemonContext'
 
 const INITIAL_PAGE = 0
 
 export function usePokemon () {
   const [page, setPage] = useState(INITIAL_PAGE)
-  const { pokemon, setPokemon } = useContext(PokemonContext)
+  const { allPokemon, setAllPokemon } = useContext(PokemonContext)
 
   // load first pokemon
   useEffect(() => {
@@ -14,13 +14,13 @@ export function usePokemon () {
       try {
         const newPoke = await getAllPokemon()
         const { data } = newPoke
-        setPokemon(data.results)
+        setAllPokemon(data.results)
       } catch (error) {
         throw new Error(error)
       }
     }
     loadPokemon()
-  }, [setPokemon])
+  }, [setAllPokemon])
 
   // next page
   useEffect(() => {
@@ -36,5 +36,5 @@ export function usePokemon () {
     nextPage()
   }, [])
 
-  return { pokemon, setPokemon, page, setPage }
+  return { allPokemon, setAllPokemon, page, setPage }
 }
