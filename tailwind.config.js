@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        flexo: ['Flexo', ...defaultTheme.fontFamily.sans]
+        sans: ['Flexo', ...defaultTheme.fontFamily.sans]
       }
     }
   },
