@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 const Context = React.createContext({})
 
 export function PokemonContextProvider ({ children }) {
-  const [pokemon, setPokemon] = useState([])
+  const [allPokemon, setAllPokemon] = useState([])
   return (
-    <Context.Provider value={{ pokemon, setPokemon }}>
+    <Context.Provider value={{ allPokemon, setAllPokemon }}>
       {children}
     </Context.Provider>
   )
