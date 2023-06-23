@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useFetchPokemon } from '../hooks/useFetchPokemon'
 import { usePalette } from 'color-thief-react'
+import { backgroundTypes } from '../conts'
 
 export function PokemonItem ({ name, url }) {
   const { dataPokemon } = useFetchPokemon({ url })
@@ -15,16 +16,20 @@ export function PokemonItem ({ name, url }) {
 
             <Link
               to={`/${name}`}
-              className='items-center p-5 py-10 duration-500 transform rounded-lg cursor-pointer hover:-translate-y-2 hover:shadow-2xl'
-              style={{ backgroundColor: data && data[0] }}
+              className='items-center p-0 py-0 duration-500 transform rounded-lg cursor-pointer hover:-translate-y-2 hover:shadow-2xl'
             >
-              <img
-                loading='lazy'
-                src={dataPokemon?.sprites?.other['official-artwork']?.front_default}
-                alt={dataPokemon?.name}
-                className='scale-90'
-              />
-              <div className='flex justify-between mt-10'>
+              <div
+                className='rounded-3xl'
+                style={{ backgroundColor: data && data[0] }}
+              >
+                <img
+                  loading='lazy'
+                  src={dataPokemon?.sprites?.other['official-artwork']?.front_default}
+                  alt={dataPokemon?.name}
+                  className='scale-90'
+                />
+              </div>
+              <div className='flex justify-between mx-4 my-4'>
                 <div className='flex flex-col justify-between'>
                   <p className='text-lg font-medium'>#{dataPokemon?.id}</p>
                   <h2
@@ -38,9 +43,12 @@ export function PokemonItem ({ name, url }) {
                     dataPokemon?.types?.map(type => (
                       <li
                         key={type?.slot}
-                        className='px-8 text-white capitalize border border-solid rounded-lg lg:text-base lg:px-5'
+                        className='px-8 capitalize border border-solid rounded-lg text-slate-700 lg:text-base lg:px-5'
+                        style={{ background: backgroundTypes[type.type.name] }}
                       >
-                        {type?.type?.name}
+                        <span className='contrast-200'>
+                          {type?.type?.name}
+                        </span>
                       </li>
 
                     ))

@@ -3,7 +3,7 @@ import { usePokemon } from '../hooks/usePokemon'
 import { SearchBar } from './SearchBar'
 
 export function ListPokemon () {
-  const { allPokemon, setAllPokemon, page, setPage } = usePokemon()
+  const { allPokemon, setAllPokemon, page, setPage, loadingAllPokemon } = usePokemon()
 
   const nextPage = async () => {
     try {
@@ -25,21 +25,23 @@ export function ListPokemon () {
     <>
       <SearchBar />
       <div className='flex flex-col justify-center max-w-3xl m-auto lg:max-w-7xl'>
-        <ul className='grid gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+        {/* <ul className='grid gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'> */}
+        <ul className='grid items-start grid-cols-1 gap-10 p-5 md:p-0 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
           {
-            allPokemon
+            allPokemon && loadingAllPokemon
               ? (
-                  allPokemon?.map((pokemon) => {
+                <h2 className='text-5xl'>Loading</h2>
+                )
+              : (
+                  allPokemon.map((pokemon) => {
                     return (
                       <PokemonItem
                         key={pokemon.name}
-                        {...pokemon}
+                        name={pokemon.name}
+                        url={pokemon.url}
                       />
                     )
                   })
-                )
-              : (
-                <h2>Loading</h2>
                 )
           }
         </ul>
