@@ -7,14 +7,19 @@ const INITIAL_PAGE = 0
 export function usePokemon () {
   const [page, setPage] = useState(INITIAL_PAGE)
   const { allPokemon, setAllPokemon } = useContext(PokemonContext)
+  const [loadingAllPokemon, setLoadingAllPokemon] = useState(false)
 
   // load first pokemon
   useEffect(() => {
-    async function loadPokemon () {
+    const loadPokemon = () => {
       try {
-        const newPoke = await getAllPokemon()
-        const { data } = newPoke
-        setAllPokemon(data.results)
+        setLoadingAllPokemon(true)
+        getAllPokemon()
+          .then(data => {
+            const { results } = data.data
+            setAllPokemon(results)
+            setLoadingAllPokemon(false)
+          })
       } catch (error) {
         throw new Error(error)
       }
@@ -36,5 +41,5 @@ export function usePokemon () {
     nextPage()
   }, [])
 
-  return { allPokemon, setAllPokemon, page, setPage }
+  return { allPokemon, setAllPokemon, page, setPage, loadingAllPokemon }
 }

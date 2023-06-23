@@ -50,7 +50,7 @@ export default function DetailPokemon () {
                 <div className='grid grid-cols-3 grid-rows-2 p-4 text-center rounded-lg bg-amber-400'>
                   <p className='text-xl font-semibold'>{pokemon.base_experience}</p>
                   <p className='text-xl font-semibold'>{pokemon.height * 10} cm</p>
-                  <p className='text-xl font-semibold'>{pokemon.weight * 0.1} kg</p>
+                  <p className='text-xl font-semibold'>{pokemon.weight / 10} kg</p>
                   <p className='text-sm font-light'>Base Exp.</p>
                   <p className='text-sm font-light'>Height</p>
                   <p className='text-sm font-light'>Weight</p>
@@ -62,20 +62,18 @@ export default function DetailPokemon () {
                       pokemon?.abilities?.map(ability => (
                         <li
                           key={ability.slot}
-                          className={`relative text-center capitalize border border-black border-solid rounded-xl ${ability.is_hidden ? 'bg-slate-800 text-white' : ''}`}
+                          className={`relative text-center uppercase border border-black border-solid rounded-xl ${ability.is_hidden ? 'bg-slate-800 text-white' : ''}`}
                         >
                           {
                             ability.is_hidden
                               ? (
-                                <>
+                                <small>
                                   <div
-                                    className='absolute text-xs capitalize left-2 top-1'
+                                    className='absolute text-xs left-2 top-1'
                                   >hidden
                                   </div>
-                                  <span className='capitalize'>
-                                    {ability.ability.name}
-                                  </span>
-                                </>
+                                  {ability.ability.name}
+                                </small>
                                 )
                               : (
                                   ability.ability.name

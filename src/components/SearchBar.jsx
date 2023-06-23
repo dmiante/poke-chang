@@ -7,13 +7,11 @@ export function SearchBar () {
 
   function handleSubmit (e) {
     e.preventDefault()
-    console.log(namePokemon)
     navigate(`/${namePokemon}`)
   }
 
   function handleSearch (event) {
-    const valuePoke = event.target.value
-    setNamePokemon(valuePoke)
+    setNamePokemon(event.target.value)
   }
 
   return (
@@ -31,7 +29,7 @@ export function SearchBar () {
               <input
                 type='search'
                 placeholder='Name or Number. Ex: Ditto, Abra, Pikachu...'
-                className='block w-full py-2.5 text-gray-700 placeholder-gray-400/70 bg-white border border-gray-200 rounded-lg pl-11 pr-5 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40'
+                className='block w-full py-2.5 text-gray-700 placeholder-gray-400/70 bg-white border border-gray-200 rounded-full pl-11 pr-5 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40'
                 onChange={handleSearch}
                 value={namePokemon}
               />
