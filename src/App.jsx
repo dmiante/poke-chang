@@ -12,7 +12,8 @@ function App () {
         <PokemonContextProvider>
           <Routes>
             <Route path='/' element={<ListPokemon />} />
-            <Route path='/:namePokemon' element={<DetailPokemon />} />
+            <Route path='/:name' element={<DetailPokemon />} />
+            <Route path='*' element={<h2>Not Found</h2>} />
           </Routes>
         </PokemonContextProvider>
       </main>
