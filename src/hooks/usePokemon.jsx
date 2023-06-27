@@ -8,6 +8,7 @@ export function usePokemon () {
   const [page, setPage] = useState(INITIAL_PAGE)
   const { allPokemon, setAllPokemon } = useContext(PokemonContext)
   const [loadingAllPokemon, setLoadingAllPokemon] = useState(false)
+  const [sort, setSort] = useState(false)
 
   // load first pokemon
   useEffect(() => {
@@ -17,7 +18,10 @@ export function usePokemon () {
         getAllPokemon()
           .then(data => {
             const { results } = data.data
-            setAllPokemon(results)
+            const sortedPokemon = sort
+              ? [...results].sort((a, b) => a.name.localeCompare(b.name))
+              : results
+            setAllPokemon(sortedPokemon)
             setLoadingAllPokemon(false)
           })
       } catch (error) {
@@ -25,7 +29,7 @@ export function usePokemon () {
       }
     }
     loadPokemon()
-  }, [setAllPokemon])
+  }, [setAllPokemon, sort])
 
   // next page
   useEffect(() => {
@@ -41,5 +45,16 @@ export function usePokemon () {
     nextPage()
   }, [])
 
-  return { allPokemon, setAllPokemon, page, setPage, loadingAllPokemon }
+  function handleSortName () {
+    setSort(!sort)
+  }
+
+  return {
+    allPokemon,
+    setAllPokemon,
+    page,
+    setPage,
+    loadingAllPokemon,
+    handleSortName
+  }
 }

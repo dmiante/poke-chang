@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Logo from '../assets/pokeball.svg'
 
 export function Header () {
   return (
@@ -7,7 +8,7 @@ export function Header () {
         <div className='flex place-items-center lg:flex-1'>
           <Link to='/' className='-m-1.5 p-1.5'>
             <span className='sr-only'>Pokechang</span>
-            <img className='w-auto h-14' src='../src/assets/pokeball.svg' alt='pokeball' />
+            <img className='w-auto h-14' src={Logo} alt='pokeball' />
           </Link>
           <h2 className='ml-3 text-3xl font-semibold font-flexo'>POKECHANG</h2>
         </div>

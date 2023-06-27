@@ -24,7 +24,7 @@ export function ListPokemon () {
   return (
     <>
       <SearchBar />
-      <div className='flex flex-col justify-center max-w-3xl m-auto lg:max-w-7xl'>
+      <div className='absolute flex flex-col justify-center max-w-3xl m-auto lg:max-w-7xl'>
         {/* <ul className='grid gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'> */}
         <ul className='grid items-start grid-cols-1 gap-10 p-5 md:p-0 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
           {
