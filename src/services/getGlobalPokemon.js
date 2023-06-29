@@ -1,8 +1,8 @@
-const BASE_URL = 'https://pokeapi.co/api/v2/type'
+const BASE_URL = 'https://pokeapi.co/api/v2/pokemon'
 
-export async function getAllTypePokemon () {
+export async function getGlobalPokemon () {
   try {
-    const response = await fetch(`${BASE_URL}`)
+    const response = await fetch(`${BASE_URL}?limit=100000&offset=0`)
     if (!response.ok) {
       const error = new Error('Error HTTP: ' + response.status)
       throw error
