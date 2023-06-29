@@ -36,17 +36,19 @@ export function SearchBar () {
               <input
                 type='search'
                 placeholder='Name or Number. Ex: Ditto, Abra, Pikachu...'
-                className='block mr-4 w-full py-2.5 text-gray-700 placeholder-gray-400/70 bg-white border border-gray-200 rounded-full pl-11 pr-5 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40'
+                className='block mr-4 w-full py-2.5 text-gray-700 placeholder-gray-400/70 bg-white border border-gray-200 rounded-full pl-11 pr-5 focus:border-amber-400 focus:ring-amber-300 focus:outline-none focus:ring focus:ring-opacity-40'
                 onChange={handleSearch}
                 value={namePokemon}
               />
               <Listbox value={selectedType} onChange={setSelected}>
                 <div className='relative w-3/6'>
-                  <Listbox.Button className='relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'>
+                  <Listbox.Button
+                    className='relative w-full py-2.5 pl-5 pr-10 text-left bg-white rounded-full shadow-sm border border-amber-300 focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'
+                  >
                     <span className='block uppercase truncate'>{selectedType}</span>
                     <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
                       <OptionsIcon
-                        className='w-5 h-5 text-gray-400'
+                        className='w-10 h-5 text-amber-500'
                         aria-hidden='true'
                       />
                     </span>
@@ -58,14 +60,14 @@ export function SearchBar () {
                     leaveTo='opacity-0'
                   >
                     <Listbox.Options className='absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-                      {listTypes.map((name) => (
+                      {listTypes.map((list) => (
                         <Listbox.Option
-                          key={name}
+                          key={list.name}
                           className={({ active }) =>
                             `relative cursor-default select-none py-2 pl-10 pr-4 ${
                               active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
                             }`}
-                          value={name}
+                          value={list.name}
                         >
                           {({ selected }) => (
                             <>
@@ -74,7 +76,7 @@ export function SearchBar () {
                                   selected ? 'font-medium' : 'font-normal'
                                 }`}
                               >
-                                {name}
+                                {list.name}
                               </span>
                               {selected
                                 ? (
