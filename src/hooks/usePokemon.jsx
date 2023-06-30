@@ -1,60 +1,28 @@
 import { useContext, useEffect, useState } from 'react'
-import { getAllPokemon } from '../services/getAllPokemon'
 import PokemonContext from '../context/PokemonContext'
 
-const INITIAL_PAGE = 0
-
-export function usePokemon () {
-  const [page, setPage] = useState(INITIAL_PAGE)
+export function usePokemon ({ url }) {
   const { allPokemon, setAllPokemon } = useContext(PokemonContext)
-  const [loadingAllPokemon, setLoadingAllPokemon] = useState(false)
-  const [sort, setSort] = useState(false)
+  const [dataPokemon, setDataPokemon] = useState(null)
 
-  // load first pokemon
+  // fetch url pokemon detail
   useEffect(() => {
-    const loadPokemon = () => {
+    async function fetchPokemon () {
       try {
-        setLoadingAllPokemon(true)
-        getAllPokemon()
-          .then(data => {
-            const { results } = data.data
-            const sortedPokemon = sort
-              ? [...results].sort((a, b) => a.name.localeCompare(b.name))
-              : results
-            setAllPokemon(sortedPokemon)
-            setLoadingAllPokemon(false)
-          })
+        const resp = await fetch(url)
+        const data = await resp.json()
+        if (!data) return null
+        setDataPokemon(data)
       } catch (error) {
         throw new Error(error)
       }
     }
-    loadPokemon()
-  }, [setAllPokemon, sort])
-
-  // next page
-  useEffect(() => {
-    const nextPage = async () => {
-      try {
-        const newPage = await getAllPokemon()
-        const { data } = newPage
-        setPage(data.next)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    nextPage()
-  }, [])
-
-  function handleSortName () {
-    setSort(!sort)
-  }
+    fetchPokemon()
+  }, [url])
 
   return {
     allPokemon,
     setAllPokemon,
-    page,
-    setPage,
-    loadingAllPokemon,
-    handleSortName
+    dataPokemon
   }
 }
