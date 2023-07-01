@@ -3,6 +3,7 @@ import PokemonContext from '../context/PokemonContext'
 
 import { PokemonItem } from './PokemonItem'
 import { SearchBar } from './SearchBar'
+import { LoaderGrid } from './LoaderItem'
 
 export function ListPokemon () {
   const { filteredPokemon, loadingAllPokemon, page, setPage } = useContext(PokemonContext)
@@ -19,7 +20,7 @@ export function ListPokemon () {
           {
             filteredPokemon && loadingAllPokemon
               ? (
-                <h2 className='text-5xl'>Loading</h2>
+                <LoaderGrid />
                 )
               : (
                   filteredPokemon?.slice(0, (page - 1) * 12 + 12)

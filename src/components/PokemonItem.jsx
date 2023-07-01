@@ -1,19 +1,21 @@
 import { Link } from 'react-router-dom'
+
 import { usePalette } from 'color-thief-react'
+
 import { backgroundTypes } from '../conts'
 import { usePokemon } from '../hooks/usePokemon'
+import { LoaderItem } from './LoaderItem'
 
 export function PokemonItem ({ url }) {
-  const { dataPokemon } = usePokemon({ url })
+  const { dataPokemon, loading } = usePokemon({ url })
   const imgSrc = dataPokemon?.sprites?.other['official-artwork']?.front_default
   const { data } = usePalette(imgSrc, 2, 'hex', { crossOrigin: 'anonymous', quality: 10 })
 
   return (
     <>
       {
-        dataPokemon
+        dataPokemon && !loading && data
           ? (
-
             <Link
               to={`/${dataPokemon.name}`}
               className='items-center p-0 py-0 duration-500 transform rounded-lg cursor-pointer hover:-translate-y-2 hover:shadow-2xl'
@@ -50,14 +52,13 @@ export function PokemonItem ({ url }) {
                           {type?.type?.name}
                         </span>
                       </li>
-
                     ))
                   }
                 </ul>
               </div>
             </Link>
             )
-          : <p>Loading...</p>
+          : <LoaderItem />
       }
     </>
   )
