@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { ListPokemon } from './components/ListPokemon'
-import { PokemonContextProvider } from './context/PokemonContext'
+import { PokemonProvider } from './context/PokemonContext'
 import { Header } from './layout/Header'
 import DetailPokemon from './components/DetailPokemon'
 
@@ -9,13 +9,13 @@ function App () {
     <>
       <Header />
       <main className='container mx-auto max-w-7xl'>
-        <PokemonContextProvider>
+        <PokemonProvider>
           <Routes>
             <Route path='/' element={<ListPokemon />} />
             <Route path='/:name' element={<DetailPokemon />} />
             <Route path='*' element={<h2>Not Found</h2>} />
           </Routes>
-        </PokemonContextProvider>
+        </PokemonProvider>
       </main>
     </>
   )

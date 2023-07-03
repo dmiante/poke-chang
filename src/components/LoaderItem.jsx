@@ -39,8 +39,8 @@ export const LoaderGrid = () => {
       speed={speed}
       width={columns * coverWidthWithPadding}
       height={rows * coverHeightWithPadding}
-      primaryColor='#242b34'
-      secondaryColor='#343d4c'
+      primarycolor='#242b34'
+      secondarycolor='#343d4c'
     >
       <rect
         x='0'
