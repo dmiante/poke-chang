@@ -7,7 +7,7 @@ export function FilterType () {
   const { listTypes, selectedType, setSelected } = useContext(PokemonContext)
   return (
     <Listbox value={selectedType} onChange={setSelected}>
-      <div className='relative w-3/6'>
+      <div className='relative w-2/5'>
         <Listbox.Button
           className='relative w-full py-2.5 pl-5 pr-10 text-left bg-white rounded-full shadow-sm border border-amber-300 focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'
         >
