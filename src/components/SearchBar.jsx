@@ -15,30 +15,55 @@ export function SearchBar () {
     listSuggestion,
     selected,
     setSelected,
+    namePokemon,
     setNamePokemon,
     display
   } = useSuggestion()
 
   const navigate = useNavigate()
 
-  function handleSubmit (e) {
-    e.preventDefault()
-    navigate(`/${selected}`)
+  // function handleSubmit (e) {
+  //   e.preventDefault()
+  //   navigate(`/${namePokemon}`)
+  // }
+
+  function onKeyDownEnter (e) {
+    if (e.code === 'Enter' && selected === null) {
+      navigate(`/${namePokemon}`)
+      // if (selected !== null) {
+      //   navigate(`/${selected}`)
+      // } else {
+      //   navigate(`/${namePokemon}`)
+      // }
+      // navigate(`/${namePokemon}`)
+      // console.log(name)
+      // navigate(`/${name}`)
+    }
+    // if (e.code === 'Enter' && namePokemon === null) {
+    //   navigate(`/${selected}`)
+    // }
+    // if (e.code === 'Enter') return navigate(`/${namePokemon}`)
   }
+
+  // useEffect(() => {
+  //   console.log(namePokemon)
+  //   console.log(listSuggestion)
+  //   console.log(selected)
+  // }, [namePokemon, listSuggestion, selected])
 
   return (
     <>
-      <div className='relative my-10'>
+      <div className='relative mb-2 mt-11 lg:my-10'>
         <h1 className='text-6xl font-normal text-center font-flexo'>PokeChang</h1>
-        <form
-          onSubmit={handleSubmit}
-        >
+        <form>
           <label htmlFor='SearchPokemon' className='sr-only'> Search Pokemon </label>
-          <div className='flex flex-col max-w-2xl mx-auto mt-5 xl:max-w-2xl'>
-            <label htmlFor='search' className='text-lg font-normal font-flexo'>Search for a pokemon by name or using its National Pokedex number</label>
-            <div className='relative flex items-center mt-2'>
+          <div className='flex flex-col max-w-3xl p-5 mx-auto mt-5 text-center lg:p-0 lg:max-w-5xl'>
+            <label htmlFor='search' className='text-lg font-normal font-flexo'>
+              Search for a pokemon by name or using its National Pokedex number
+            </label>
+            <div className='relative flex flex-col items-center gap-5 mt-2 lg:gap-3 md:flex-row lg:justify-between'>
               <Combobox value={selected} onChange={setSelected}>
-                <div className='relative w-full mt-1 mr-4'>
+                <div className='relative w-full mt-1 md:mr-1 lg:mr-1 lg:m-0 lg:w-4/5'>
                   <div>
                     <img className='absolute left-0 w-6 h-6 mx-3 text-gray-400 top-2.5 dark:text-gray-500' src={Logo} alt='pokeballSearch' />
                     <Combobox.Input
@@ -48,6 +73,7 @@ export function SearchBar () {
                       autoComplete='off'
                       onBlur={() => { setNamePokemon('') || setSelected('') }}
                       displayValue={(name) => name}
+                      onKeyDown={onKeyDownEnter}
                     />
                   </div>
                   <Transition

@@ -15,8 +15,8 @@ export function ListPokemon () {
   return (
     <>
       <SearchBar />
-      <div className='absolute flex flex-col justify-center max-w-3xl m-auto lg:max-w-7xl'>
-        <ul className='grid items-start grid-cols-1 gap-10 p-5 md:p-0 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
+      <div className='flex flex-col max-w-3xl p-5 mx-auto lg:max-w-7xl'>
+        <ul className='grid items-start grid-cols-1 gap-10 p-5 md:p-5 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
           {
             filteredPokemon && loadingAllPokemon
               ? (
@@ -36,7 +36,7 @@ export function ListPokemon () {
           }
         </ul>
         <button
-          className='px-6 py-2 my-10 text-white rounded-lg bg-sky-500 font-flexo hover:bg-sky-800'
+          className='px-6 py-2 mx-5 my-10 text-white rounded-lg bg-sky-500 font-flexo hover:bg-sky-800'
           onClick={handleLoadMore}
         >
           Load More

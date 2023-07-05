@@ -11,18 +11,18 @@ export default function DetailPokemon () {
     <>
       <div className='grid grid-cols-3 lg:mt-12'>
         <button
-          className='p-5 text-lg font-semibold bg-white border border-black border-solid text-amber-500 lg:rounded-tl-full lg:border-4 lg:border-solid lg:border-amber-400 hover:bg-amber-100 hover:text-amber-600 disabled:hover:bg-amber-200 disabled:cursor-not-allowed'
+          className='py-5 text-xl font-semibold bg-white border-4 border-solid border-amber-400 text-amber-500 lg:rounded-tl-full lg:border-4 lg:border-solid lg:border-amber-400 hover:bg-amber-100 hover:text-amber-600 disabled:hover:bg-amber-200 disabled:cursor-not-allowed'
           disabled={pokemon.id === 1}
           onClick={() => navigate(`/${pokemon.id - 1}`)}
         >Previous Pokemon
         </button>
         <button
-          className='text-lg font-semibold text-white border border-black border-solid bg-amber-400 lg:border-y-4 lg:border-solid lg:border-amber-400 hover:bg-amber-100 hover:text-amber-500'
+          className='p-5 text-xl font-semibold text-white border-4 border-solid border-amber-400 bg-amber-400 lg:border-y-4 lg:border-solid lg:border-amber-400 hover:bg-amber-100 hover:text-amber-500'
           onClick={() => navigate('/')}
         >Home
         </button>
         <button
-          className='text-lg font-semibold bg-white border border-black border-solid text-amber-500 lg:rounded-tr-full lg:border-4 lg:border-solid lg:border-amber-400 hover:bg-amber-100 hover:text-amber-600'
+          className='p-5 text-xl font-semibold text-center bg-white border-4 border-solid border-amber-400 text-amber-500 lg:rounded-tr-full lg:border-4 lg:border-solid lg:border-amber-400 hover:bg-amber-100 hover:text-amber-600'
           onClick={() => navigate(`/${pokemon.id + 1}`)}
         >Next Pokemon
         </button>
@@ -103,25 +103,25 @@ export default function DetailPokemon () {
                       <table className='w-full border-separate table-fixed border-spacing-y-2'>
                         <tbody>
                           {
-                pokemon?.stats?.map(stat => (
-                  <tr
-                    key={stat.stat.name}
-                    className='h-11'
-                  >
-                    <th className='w-3/12 rounded-l-lg bg-amber-600'>
-                      {baseStatsNames[stat.stat.name]}
-                    </th>
-                    <td className='w-full p-0 font-bold text-right bg-amber-300 rounded-r-xl'>
-                      <div
-                        className='py-3 pr-2 rounded-r-xl bg-amber-500'
-                        style={{ width: `${(stat.base_stat / maxStat) * 100}%` }}
-                      >
-                        {stat.base_stat}
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              }
+                            pokemon?.stats?.map(stat => (
+                              <tr
+                                key={stat.stat.name}
+                                className='h-11'
+                              >
+                                <th className='w-2/6 rounded-l-lg md:w-3/12 bg-amber-600'>
+                                  {baseStatsNames[stat.stat.name]}
+                                </th>
+                                <td className='w-full p-0 font-bold text-right bg-amber-300 rounded-r-xl'>
+                                  <div
+                                    className='py-3 pr-2 rounded-r-xl bg-amber-500'
+                                    style={{ width: `${(stat.base_stat / maxStat) * 100}%` }}
+                                  >
+                                    {stat.base_stat}
+                                  </div>
+                                </td>
+                              </tr>
+                            ))
+                          }
                         </tbody>
                       </table>
                     </div>
