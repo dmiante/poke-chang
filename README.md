@@ -12,11 +12,11 @@ Esta es una aplicación web de tipo Pokedex que te permite buscar y explorar inf
 
 ## Capturas de pantalla
 
-![Captura de pantalla 1](screenshots/screenshot1.png)
-_Descripción de la captura de pantalla 1._
+![screenshot1](https://github.com/dmiante/poke-chang/assets/57960462/18b94543-b845-4e3f-a4e0-9c3e6207376d)
+_Pantalla inicio._
 
-![Captura de pantalla 2](screenshots/screenshot2.png)
-_Descripción de la captura de pantalla 2._
+![screen1](https://github.com/dmiante/poke-chang/assets/57960462/f44e0ea6-819f-4867-bd16-6057752bdcc0)
+_Detalle del pokemon._
 
 ## Instalación
 
