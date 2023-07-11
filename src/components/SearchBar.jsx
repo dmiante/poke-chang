@@ -11,51 +11,36 @@ import { useSuggestion } from '../hooks/useSuggestion'
 
 export function SearchBar () {
   const {
-    handleSearch,
+    allPokemon,
+    onChange,
     listSuggestion,
     selected,
     setSelected,
     namePokemon,
-    setNamePokemon,
     display
   } = useSuggestion()
 
   const navigate = useNavigate()
 
-  // function handleSubmit (e) {
-  //   e.preventDefault()
-  //   navigate(`/${namePokemon}`)
-  // }
-
-  function onKeyDownEnter (e) {
-    if (e.code === 'Enter' && selected === null) {
-      navigate(`/${namePokemon}`)
-      // if (selected !== null) {
-      //   navigate(`/${selected}`)
-      // } else {
-      //   navigate(`/${namePokemon}`)
-      // }
-      // navigate(`/${namePokemon}`)
-      // console.log(name)
-      // navigate(`/${name}`)
-    }
-    // if (e.code === 'Enter' && namePokemon === null) {
-    //   navigate(`/${selected}`)
-    // }
-    // if (e.code === 'Enter') return navigate(`/${namePokemon}`)
+  function handleSubmit (e) {
+    e.preventDefault()
+    navigate(`/${namePokemon}`)
+    console.log('onSubmit')
   }
 
-  // useEffect(() => {
-  //   console.log(namePokemon)
-  //   console.log(listSuggestion)
-  //   console.log(selected)
-  // }, [namePokemon, listSuggestion, selected])
+  function onKeyDownEnter (e) {
+    if (!isNaN(namePokemon)) {
+      if (e.code === 'Enter') {
+        navigate(`/${namePokemon}`)
+      }
+    }
+  }
 
   return (
     <>
       <div className='relative mb-2 mt-11 lg:my-10'>
         <h1 className='text-6xl font-normal text-center font-flexo'>PokeChang</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor='SearchPokemon' className='sr-only'> Search Pokemon </label>
           <div className='flex flex-col max-w-3xl p-5 mx-auto mt-5 text-center lg:p-0 lg:max-w-5xl'>
             <label htmlFor='search' className='text-lg font-normal font-flexo'>
@@ -65,14 +50,14 @@ export function SearchBar () {
               <Combobox value={selected} onChange={setSelected}>
                 <div className='relative w-full mt-1 md:mr-1 lg:mr-1 lg:m-0 lg:w-4/5'>
                   <div>
-                    <img className='absolute left-0 w-6 h-6 mx-3 text-gray-400 top-2.5 dark:text-gray-500' src={Logo} alt='pokeballSearch' />
+                    <img className='absolute left-0 w-6 h-6 mx-3 text-gray-400 top-2.5 dark:text-gray-500' src={Logo} alt='Pokeball' />
                     <Combobox.Input
                       className='mr-4 w-full py-2.5 text-gray-700 placeholder-gray-400/70 bg-white border border-gray-200 rounded-full pl-11 pr-5 focus:border-amber-400 focus:ring-amber-300 focus:outline-none focus:ring focus:ring-opacity-40'
                       placeholder='Name or Number. Ex: Ditto, Abra, Pikachu...'
-                      onChange={handleSearch}
-                      autoComplete='off'
-                      onBlur={() => { setNamePokemon('') || setSelected('') }}
                       displayValue={(name) => name}
+                      onChange={onChange}
+                      autoComplete='off'
+                      // onBlur={() => { setNamePokemon('') || setSelected('') }}
                       onKeyDown={onKeyDownEnter}
                     />
                   </div>
@@ -81,7 +66,6 @@ export function SearchBar () {
                     leave='transition ease-in duration-100'
                     leaveFrom='opacity-100'
                     leaveTo='opacity-0'
-                    afterLeave={() => setNamePokemon('')}
                   >
                     <Combobox.Options className='absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
                       {
@@ -123,8 +107,12 @@ export function SearchBar () {
                               ))
                             )
                           : (
-                            <div className='relative px-4 py-2 text-gray-700 cursor-default select-none'>
-                              No found Pokemon.
+                            <div className='relative px-4 py-2 font-semibold text-gray-700 cursor-default select-none'>
+                              {
+                                !isNaN(namePokemon)
+                                  ? `Id or number must be less than ${allPokemon.length}`
+                                  : 'No found Pokemon.'
+                              }
                             </div>
                             )
                       }
