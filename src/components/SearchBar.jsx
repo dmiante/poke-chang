@@ -1,8 +1,6 @@
 import { Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Logo from '../assets/pokeball.svg'
-
 import { Combobox, Transition } from '@headlessui/react'
 
 import { FilterType } from './FilterType'
@@ -50,7 +48,7 @@ export function SearchBar () {
               <Combobox value={selected} onChange={setSelected}>
                 <div className='relative w-full mt-1 md:mr-1 lg:mr-1 lg:m-0 lg:w-4/5'>
                   <div>
-                    <img className='absolute left-0 w-6 h-6 mx-3 text-gray-400 top-2.5 dark:text-gray-500' src={Logo} alt='Pokeball' />
+                    <img className='absolute left-0 w-6 h-6 mx-3 text-gray-400 top-2.5 dark:text-gray-500' src='/pokeball.svg' alt='Pokeball' />
                     <Combobox.Input
                       className='mr-4 w-full py-2.5 text-gray-700 placeholder-gray-400/70 bg-white border border-gray-200 rounded-full pl-11 pr-5 focus:border-amber-400 focus:ring-amber-300 focus:outline-none focus:ring focus:ring-opacity-40'
                       placeholder='Name or Number. Ex: Ditto, Abra, Pikachu...'
