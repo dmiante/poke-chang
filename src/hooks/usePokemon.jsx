@@ -1,10 +1,13 @@
 import { useContext, useEffect, useState } from 'react'
 import PokemonContext from '../context/PokemonContext'
+import { usePalette } from 'color-thief-react'
 
 export function usePokemon ({ url }) {
   const { allPokemon, setAllPokemon } = useContext(PokemonContext)
   const [dataPokemon, setDataPokemon] = useState(null)
   const [loading, setLoading] = useState(false)
+  const imgSrc = dataPokemon?.sprites?.other['official-artwork']?.front_default
+  const { data } = usePalette(imgSrc, 2, 'hex', { crossOrigin: 'anonymous', quality: 10 })
 
   // fetch url pokemon detail
   useEffect(() => {
@@ -27,6 +30,7 @@ export function usePokemon ({ url }) {
     allPokemon,
     setAllPokemon,
     dataPokemon,
-    loading
+    loading,
+    data
   }
 }

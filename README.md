@@ -51,5 +51,5 @@ npm run dev
 - React: biblioteca de JavaScript para construir interfaces de usuario.
 - Tailwind CSS: framework CSS utilizado para estilizar la aplicación de manera eficiente.
 - Pokémon API: se utilizó una API de Pokémon para obtener la información necesaria sobre los Pokémon.
-- SVGPS: Se buscaron los iconos en svgps.app. 
+- heroicons.com: Para los iconos del filtro y algunos enlaces.
 - Color-thief-react: repositorio para el background de las imagenes.

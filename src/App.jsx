@@ -8,7 +8,7 @@ function App () {
   return (
     <>
       <Header />
-      <main className='container mx-auto max-w-7xl'>
+      <main className='container mx-auto'>
         <PokemonProvider>
           <Routes>
             <Route path='/' element={<ListPokemon />} />

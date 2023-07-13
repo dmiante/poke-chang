@@ -1,49 +1,63 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { backgroundTypes, baseStatsNames, maxStat } from '../conts'
 import { usePokeByName } from '../hooks/usePokeByName'
 import { LoaderDetail } from './LoaderItem'
+import { ArrowLeft, ArrowRight, HomeIcon } from '../assets/Icons'
+import { usePalette } from 'color-thief-react'
 
 export default function DetailPokemon () {
-  const navigate = useNavigate()
   const { name } = useParams()
   const { pokemon, loading } = usePokeByName({ name })
+  const imgSrc = pokemon?.sprites?.other['official-artwork']?.front_default
+  const { data } = usePalette(imgSrc, 2, 'hex', { crossOrigin: 'anonymous', quality: 10 })
+
   return (
-    <>
-      <div className='grid grid-cols-3 lg:mt-12'>
-        <button
-          className='py-5 text-xl font-semibold bg-white border-4 border-solid border-amber-400 text-amber-500 lg:rounded-tl-full lg:border-4 lg:border-solid lg:border-amber-400 hover:bg-amber-100 hover:text-amber-600 disabled:hover:bg-amber-200 disabled:cursor-not-allowed'
-          disabled={pokemon.id === 1}
-          onClick={() => navigate(`/${pokemon.id - 1}`)}
-        >Previous Pokemon
-        </button>
-        <button
-          className='p-5 text-xl font-semibold text-white border-4 border-solid border-amber-400 bg-amber-400 lg:border-y-4 lg:border-solid lg:border-amber-400 hover:bg-amber-100 hover:text-amber-500'
-          onClick={() => navigate('/')}
-        >Home
-        </button>
-        <button
-          className='p-5 text-xl font-semibold text-center bg-white border-4 border-solid border-amber-400 text-amber-500 lg:rounded-tr-full lg:border-4 lg:border-solid lg:border-amber-400 hover:bg-amber-100 hover:text-amber-600'
-          onClick={() => navigate(`/${pokemon.id + 1}`)}
-        >Next Pokemon
-        </button>
+    <div>
+      <div className='grid grid-cols-2 grid-rows-2 gap-2 my-4 lg:grid-rows-1 lg:grid-cols-3'>
+        <Link
+          className='inline-flex items-center justify-center col-span-2 gap-2 my-5 text-xl font-semibold underline lg:col-auto lg:hover:no-underline'
+          // onClick={() => navigate('/')}
+          to='/'
+        >
+          <HomeIcon />
+          Home
+        </Link>
+        <Link
+          className='inline-flex items-center justify-start row-start-2 pl-4 text-xl font-semibold rounded-md lg:row-auto lg:order-first lg:hover:border-2 lg:hover:border-black lg:rounded-full lg:transition lg:duration-300 lg:ease-in-out'
+          // disabled:hover:bg-amber-200 disabled:cursor-not-allowed
+          // disabled={pokemon.id === 1}
+          // onClick={() => navigate(`/${pokemon.id - 1}`)}
+          to={pokemon.id !== 1 ? `/${pokemon.id - 1}` : ''}
+        >
+          <ArrowLeft />
+          Prev Pokemon
+        </Link>
+        <Link
+          className='inline-flex items-center justify-end row-start-2 pr-4 text-xl font-semibold rounded-md lg:row-auto lg:hover:border-2 lg:hover:border-black lg:rounded-full lg:transition lg:duration-300 lg:ease-in-out'
+          // onClick={() => navigate(`/${pokemon.id + 1}`)}
+          to={`/${pokemon.id + 1}`}
+        >
+          Next Pokemon
+          <ArrowRight />
+        </Link>
       </div>
       {
           pokemon && !loading
             ? (
               <>
                 <section
-                  className='flex flex-col m-8 lg:m-0 lg:flex-row lg:border-4 lg:border-solid lg:border-amber-400 lg:rounded-b-3xl lg:p-8 lg:gap-12 lg:border-t-0'
+                  className='flex flex-col gap-10 mx-2 my-8 lg:mt-10 lg:flex-row lg:mx-auto lg:gap-8 lg:justify-between lg:w-full'
                 >
-                  <aside className='flex flex-col basis-1/2'>
-                    <h4>#{pokemon.id}</h4>
-                    <div className='flex items-center justify-between'>
+                  <aside className='flex flex-col basis-1/2 lg:w-1/2'>
+                    <h4 className='mx-2 lg:text-lg'>#{pokemon.id}</h4>
+                    <div className='flex items-start justify-between mx-2'>
                       <h2 className='text-3xl font-bold capitalize'>{pokemon.name}</h2>
-                      <ul className='flex gap-1 lg:gap-4'>
+                      <ul className='flex flex-col gap-1 lg:gap-2 lg:flex-row'>
                         {
                           pokemon?.types?.map(type => (
                             <li
                               key={type.slot}
-                              className='px-2 text-white capitalize border border-solid rounded-lg lg:text-lg lg:px-10'
+                              className='items-center px-3 py-1 text-center text-white capitalize border border-solid rounded-lg min-w-max lg:text-lg lg:px-10'
                               style={{ background: backgroundTypes[type.type.name] }}
                             >
                               {type.type.name}
@@ -52,68 +66,79 @@ export default function DetailPokemon () {
                         }
                       </ul>
                     </div>
-                    <img
-                      loading='lazy'
-                      src={pokemon?.sprites?.other['official-artwork']?.front_default}
-                      alt={pokemon.name}
-                      className='self-center w-3/4 my-6'
-                    />
+                    <div
+                      // className='flex items-center justify-center py-4 mx-2 my-8 rounded-full lg:p-44'
+                      className='flex items-center justify-center lg:mt-20'
+                    >
+                      <div
+                        className='py-4 my-8 rounded-full'
+                        style={{ backgroundColor: data && data[0] }}
+                      >
+                        <img
+                          loading='lazy'
+                          src={pokemon?.sprites?.other['official-artwork']?.front_default}
+                          alt={pokemon.name}
+                          className='w-full px-5'
+                        />
+                      </div>
+                    </div>
                   </aside>
-                  <aside className='flex flex-col gap-4 basis-1/2'>
-                    <h3 className='text-xl font-bold text-center'>Details</h3>
-                    <div className='grid grid-cols-3 grid-rows-2 p-4 text-center rounded-lg bg-amber-400'>
-                      <p className='text-xl font-semibold'>{pokemon.base_experience}</p>
-                      <p className='text-xl font-semibold'>{pokemon.height * 10} cm</p>
-                      <p className='text-xl font-semibold'>{pokemon.weight / 10} kg</p>
+                  <aside className='flex flex-col gap-4 p-5 shadow-2xl rounded-xl lg:w-1/3'>
+                    <h3 className='mt-2 text-xl font-bold text-center uppercase lg:text-3xl'>Details</h3>
+                    <div className='grid grid-cols-3 grid-rows-2 text-center'>
+                      <p className='text-2xl font-semibold'>{pokemon.base_experience}</p>
+                      <p className='text-2xl font-semibold'>{pokemon.height * 10} cm</p>
+                      <p className='text-2xl font-semibold'>{pokemon.weight / 10} kg</p>
                       <p className='text-sm font-light'>Base Exp.</p>
                       <p className='text-sm font-light'>Height</p>
                       <p className='text-sm font-light'>Weight</p>
                     </div>
-                    <h3 className='text-xl font-bold text-center'>Abilities</h3>
-                    <div className='p-4 rounded-lg bg-amber-400'>
-                      <ul className='flex flex-col gap-1'>
+                    <h3 className='mt-4 text-xl font-bold text-center uppercase lg:text-3xl'>Abilities</h3>
+                    <div className='flex justify-center w-full m-auto lg:max-w-sm'>
+                      <ul className='flex flex-col w-full gap-1'>
                         {
-              pokemon?.abilities?.map(ability => (
-                <li
-                  key={ability.slot}
-                  className={`relative text-center uppercase border border-black border-solid rounded-xl ${ability.is_hidden ? 'bg-slate-800 text-white' : ''}`}
-                >
-                  {
-                    ability.is_hidden
-                      ? (
-                        <small>
-                          <div
-                            className='absolute text-xs left-2 top-1'
-                          >hidden
-                          </div>
-                          {ability.ability.name}
-                        </small>
-                        )
-                      : (
-                          ability.ability.name
-                        )
-                  }
-                </li>
-              ))
-            }
+                          pokemon?.abilities?.map(ability => (
+                            <li
+                              key={ability.slot}
+                              className={`relative text-center uppercase border border-black border-solid rounded-full ${ability.is_hidden ? 'bg-slate-800 text-white' : ''}`}
+                            >
+                              {
+                                ability.is_hidden
+                                  ? (
+                                    <>
+                                      <div
+                                        className='absolute text-xs top-1 left-3'
+                                      >
+                                        hidden
+                                      </div>
+                                      {ability.ability.name}
+                                    </>
+                                    )
+                                  : (
+                                      ability.ability.name
+                                    )
+                              }
+                            </li>
+                          ))
+                        }
                       </ul>
                     </div>
-                    <h3 className='text-lg font-bold text-center'>Base Stats</h3>
-                    <div className='p-4 rounded-lg bg-amber-400'>
-                      <table className='w-full border-separate table-fixed border-spacing-y-2'>
+                    <div className=''>
+                      <h3 className='mt-4 text-xl font-bold text-center uppercase lg:text-3xl'>Base Stats</h3>
+                      <table className='w-full border-separate table-fixed border-spacing-y-4'>
                         <tbody>
                           {
                             pokemon?.stats?.map(stat => (
                               <tr
                                 key={stat.stat.name}
-                                className='h-11'
+                                className='rounded-xl h-14 outline outline-1 outline-amber-400'
                               >
-                                <th className='w-2/6 rounded-l-lg md:w-3/12 bg-amber-600'>
+                                <th className='w-2/6 text-xs rounded-l-xl md:w-3/12 bg-amber-400 lg:text-xl'>
                                   {baseStatsNames[stat.stat.name]}
                                 </th>
-                                <td className='w-full p-0 font-bold text-right bg-amber-300 rounded-r-xl'>
+                                <td className='w-full p-0 font-bold text-right rounded-r-xl'>
                                   <div
-                                    className='py-3 pr-2 rounded-r-xl bg-amber-500'
+                                    className='py-5 pr-4 text-sm lg:text-lg rounded-r-xl bg-amber-400'
                                     style={{ width: `${(stat.base_stat / maxStat) * 100}%` }}
                                   >
                                     {stat.base_stat}
@@ -136,6 +161,6 @@ export default function DetailPokemon () {
           // <p>LOADING</p>
               )
           }
-    </>
+    </div>
   )
 }

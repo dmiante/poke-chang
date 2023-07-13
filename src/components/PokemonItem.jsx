@@ -1,15 +1,11 @@
 import { Link } from 'react-router-dom'
 
-import { usePalette } from 'color-thief-react'
-
 import { backgroundTypes } from '../conts'
 import { usePokemon } from '../hooks/usePokemon'
 import { LoaderItem } from './LoaderItem'
 
 export function PokemonItem ({ url }) {
-  const { dataPokemon, loading } = usePokemon({ url })
-  const imgSrc = dataPokemon?.sprites?.other['official-artwork']?.front_default
-  const { data } = usePalette(imgSrc, 2, 'hex', { crossOrigin: 'anonymous', quality: 10 })
+  const { dataPokemon, loading, data } = usePokemon({ url })
 
   return (
     <>
@@ -21,7 +17,7 @@ export function PokemonItem ({ url }) {
               className='items-center p-0 py-0 duration-500 transform rounded-lg cursor-pointer hover:-translate-y-2 hover:shadow-2xl'
             >
               <div
-                className='rounded-3xl'
+                className='rounded-lg'
                 style={{ backgroundColor: data && data[0] }}
               >
                 <img
@@ -31,7 +27,7 @@ export function PokemonItem ({ url }) {
                   className='scale-90'
                 />
               </div>
-              <div className='flex justify-between mx-4 my-4'>
+              <div className='flex justify-between mx-4 my-5'>
                 <div className='flex flex-col justify-between'>
                   <p className='text-lg font-medium'>#{dataPokemon?.id}</p>
                   <h2
