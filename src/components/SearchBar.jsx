@@ -23,7 +23,6 @@ export function SearchBar () {
   function handleSubmit (e) {
     e.preventDefault()
     navigate(`/${namePokemon}`)
-    console.log('onSubmit')
   }
 
   function onKeyDownEnter (e) {
