@@ -14,34 +14,44 @@ export default function DetailPokemon () {
   const imgSrc = pokemon?.sprites?.other['official-artwork']?.front_default
   const { data } = usePalette(imgSrc, 2, 'hex', { crossOrigin: 'anonymous', quality: 10 })
 
-  // console.log(pokemon)
   return (
-    <div>
-      <div className='grid grid-cols-2 grid-rows-2 gap-2 my-4 lg:grid-rows-1 lg:grid-cols-3'>
+    <div className='my-10'>
+      {/* BUTTONS PREV & NEXT */}
+      <div className='grid grid-cols-2 grid-rows-2 gap-2 mb-4 lg:grid-rows-1 lg:grid-cols-3'>
         <Link
-          className='inline-flex items-center justify-center col-span-2 gap-2 my-5 text-xl font-semibold underline lg:col-auto lg:hover:no-underline'
+          className='inline-flex items-center justify-center col-span-2 gap-2 my-5 text-xl font-semibold underline underline-offset-4 lg:col-auto lg:no-underline lg:text-2xl lg:mt-0'
           // onClick={() => navigate('/')}
           to='/'
         >
           <HomeIcon />
-          Home
+          <div className='transition duration-300 group'>
+            Home
+            <span className='block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-black' />
+          </div>
         </Link>
         <Link
-          className='inline-flex items-center justify-start row-start-2 pl-4 text-xl font-semibold rounded-md lg:row-auto lg:order-first lg:hover:border-2 lg:hover:border-black lg:rounded-full lg:transition lg:duration-300 lg:ease-in-out'
+          className='inline-flex items-center justify-start row-start-2 text-xl font-semibold transition duration-300 rounded-md group lg:row-auto lg:order-first lg:rounded-full'
+          // className='inline-block transition duration-300 group lg:order-first lg:block'
           // disabled:hover:bg-amber-200 disabled:cursor-not-allowed
           // disabled={pokemon.id === 1}
           // onClick={() => navigate(`/${pokemon.id - 1}`)}
           to={pokemon.id !== 1 ? `/${pokemon.id - 1}` : ''}
         >
           <ArrowLeft />
-          Prev Pokemon
+          <div className='transition duration-300 group'>
+            Prev Pokemon
+            <span className='block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-black' />
+          </div>
         </Link>
         <Link
-          className='inline-flex items-center justify-end row-start-2 pr-4 text-xl font-semibold rounded-md lg:row-auto lg:hover:border-2 lg:hover:border-black lg:rounded-full lg:transition lg:duration-300 lg:ease-in-out'
+          className='inline-flex items-center justify-end row-start-2 text-xl font-semibold rounded-md lg:row-auto lg:rounded-full'
           // onClick={() => navigate(`/${pokemon.id + 1}`)}
           to={`/${pokemon.id + 1}`}
         >
-          Next Pokemon
+          <div className='transition duration-300 group'>
+            Next Pokemon
+            <span className='block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-black' />
+          </div>
           <ArrowRight />
         </Link>
       </div>
@@ -157,16 +167,15 @@ export default function DetailPokemon () {
                       </table>
                     </div>
                   </aside>
-                  {/* EVOLUTION INFO */}
-                  <EvolutionSection name={name} />
                 </section>
+                {/* EVOLUTION INFO */}
+                <EvolutionSection name={name} />
               </>
               )
             : (
               <div className='flex items-center justify-center'>
                 <LoaderDetail />
               </div>
-          // <p>LOADING</p>
               )
           }
     </div>
