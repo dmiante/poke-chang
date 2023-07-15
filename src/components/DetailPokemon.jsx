@@ -7,6 +7,7 @@ import EvolutionSection from './EvolutionSection'
 import { usePokeByName } from '../hooks/usePokeByName'
 import { backgroundTypes, baseStatsNames, maxStat } from '../conts'
 import { ArrowLeft, ArrowRight, HomeIcon } from '../assets/Icons'
+import { SearchBar } from './SearchBar'
 
 export default function DetailPokemon () {
   const { name } = useParams()
@@ -15,9 +16,12 @@ export default function DetailPokemon () {
   const { data } = usePalette(imgSrc, 2, 'hex', { crossOrigin: 'anonymous', quality: 10 })
 
   return (
-    <div className='my-10'>
+    <div>
+      <div>
+        <SearchBar />
+      </div>
       {/* BUTTONS PREV & NEXT */}
-      <div className='grid grid-cols-2 grid-rows-2 gap-2 mb-4 lg:grid-rows-1 lg:grid-cols-3'>
+      <div className='grid grid-cols-2 grid-rows-2 gap-2 my-10 lg:grid-rows-1 lg:grid-cols-3'>
         <Link
           className='inline-flex items-center justify-center col-span-2 gap-2 my-5 text-xl font-semibold underline underline-offset-4 lg:col-auto lg:no-underline lg:text-2xl lg:mt-0'
           // onClick={() => navigate('/')}

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 
 import { Combobox, Transition } from '@headlessui/react'
 
-import { FilterType } from './FilterType'
 import { CheckIcon } from '../assets/Icons'
 import { useSuggestion } from '../hooks/useSuggestion'
 
@@ -35,37 +34,38 @@ export function SearchBar () {
 
   return (
     <>
-      <div className='relative mb-2 mt-11 lg:my-10'>
-        <h1 className='text-6xl font-normal text-center font-flexo'>PokeChang</h1>
+      <div className='relative lg:w-1/2'>
         <form onSubmit={handleSubmit}>
           <label htmlFor='SearchPokemon' className='sr-only'> Search Pokemon </label>
-          <div className='flex flex-col max-w-3xl p-5 mx-auto mt-5 text-center lg:p-0 lg:max-w-5xl'>
-            <label htmlFor='search' className='text-lg font-normal font-flexo'>
-              Search for a pokemon by name or using its National Pokedex number
-            </label>
-            <div className='relative flex flex-col items-center gap-5 mt-2 lg:gap-3 md:flex-row lg:justify-between'>
-              <Combobox value={selected} onChange={setSelected}>
-                <div className='relative w-full mt-1 md:mr-1 lg:mr-1 lg:m-0 lg:w-4/5'>
-                  <div>
-                    <img className='absolute left-0 w-6 h-6 mx-3 text-gray-400 top-2.5 dark:text-gray-500' src='/pokeball.svg' alt='Pokeball' />
+          <div className='flex flex-col items-center justify-center max-w-3xl mx-auto mt-5 text-center lg:p-0 lg:max-w-5xl'>
+            {/* <div className='flex gap-5 mt-2 md:flex-row'> */}
+            <Combobox value={selected} onChange={setSelected}>
+              <div className='relative w-full mt-1'>
+                <div className='flex flex-col items-center justify-center w-full'>
+                  <Combobox.Label>Search for a pokemon by name or using its National Pokedex number</Combobox.Label>
+                  <div className='relative flex items-center w-full mt-2'>
+                    <span className='absolute'>
+                      <img className='w-6 h-6 mx-3' src='/pokeball.svg' alt='Pokeball' />
+                    </span>
                     <Combobox.Input
-                      className='mr-4 w-full py-2.5 text-gray-700 placeholder-gray-400/70 bg-white border border-gray-200 rounded-full pl-11 pr-5 focus:border-amber-400 focus:ring-amber-300 focus:outline-none focus:ring focus:ring-opacity-40'
+                      className='w-full py-3 pr-5 text-gray-700 bg-white border border-gray-200 rounded-full placeholder-gray-400/70 pl-11 focus:border-amber-400 focus:ring-amber-300 focus:outline-none focus:ring focus:ring-opacity-40'
                       placeholder='Name or Number. Ex: Ditto, Abra, Pikachu...'
                       displayValue={(name) => name}
                       onChange={onChange}
                       autoComplete='off'
-                      // onBlur={() => { setNamePokemon('') || setSelected('') }}
+                        // onBlur={() => { setNamePokemon('') || setSelected('') }}
                       onKeyDown={onKeyDownEnter}
                     />
                   </div>
-                  <Transition
-                    as={Fragment}
-                    leave='transition ease-in duration-100'
-                    leaveFrom='opacity-100'
-                    leaveTo='opacity-0'
-                  >
-                    <Combobox.Options className='absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-                      {
+                </div>
+                <Transition
+                  as={Fragment}
+                  leave='transition ease-in duration-100'
+                  leaveFrom='opacity-100'
+                  leaveTo='opacity-0'
+                >
+                  <Combobox.Options className='absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+                    {
                         display && listSuggestion.length !== 0
                           ? (
                               listSuggestion.map((name) => (
@@ -113,12 +113,12 @@ export function SearchBar () {
                             </div>
                             )
                       }
-                    </Combobox.Options>
-                  </Transition>
-                </div>
-              </Combobox>
-              <FilterType />
-            </div>
+                  </Combobox.Options>
+                </Transition>
+              </div>
+            </Combobox>
+            {/* <FilterType /> */}
+            {/* </div> */}
           </div>
         </form>
       </div>

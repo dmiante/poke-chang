@@ -4,6 +4,7 @@ import PokemonContext from '../context/PokemonContext'
 import { PokemonItem } from './PokemonItem'
 import { SearchBar } from './SearchBar'
 import { LoaderGrid } from './LoaderItem'
+import { FilterType } from './FilterType'
 
 export function ListPokemon () {
   const { filteredPokemon, loadingAllPokemon, page, setPage } = useContext(PokemonContext)
@@ -14,9 +15,13 @@ export function ListPokemon () {
 
   return (
     <>
-      <SearchBar />
-      <div className='flex flex-col max-w-3xl p-5 mx-auto lg:max-w-7xl'>
-        <ul className='grid items-start grid-cols-1 gap-10 p-5 md:p-5 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
+      <h1 className='mt-10 text-6xl font-normal text-center font-flexo'>PokeChang</h1>
+      <section className='flex flex-col items-center justify-center max-w-full gap-4 p-5 lg:flex lg:flex-row lg:gap-5 lg:items-end lg:w-full'>
+        <SearchBar />
+        <FilterType />
+      </section>
+      <div className='flex flex-col max-w-3xl p-5 mx-auto lg:max-w-full'>
+        <ul className='grid items-start grid-cols-1 gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6'>
           {
             filteredPokemon && loadingAllPokemon
               ? (
