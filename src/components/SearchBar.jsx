@@ -45,7 +45,11 @@ export function SearchBar () {
                   <Combobox.Label>Search for a pokemon by name or using its National Pokedex number</Combobox.Label>
                   <div className='relative flex items-center w-full mt-2'>
                     <span className='absolute'>
-                      <img className='w-6 h-6 mx-3' src='/pokeball.svg' alt='Pokeball' />
+                      <img
+                        className='w-6 h-6 mx-3 hover:animate-wiggle-more hover:animate-twice hover:animate-duration-200'
+                        src='/pokeball.svg'
+                        alt='Pokeball'
+                      />
                     </span>
                     <Combobox.Input
                       className='w-full py-3 pr-5 text-gray-700 bg-white border border-gray-200 rounded-full placeholder-gray-400/70 pl-11 focus:border-amber-400 focus:ring-amber-300 focus:outline-none focus:ring focus:ring-opacity-40'

@@ -15,12 +15,12 @@ export function ListPokemon () {
 
   return (
     <>
-      <h1 className='mt-10 text-6xl font-normal text-center font-flexo'>PokeChang</h1>
+      <h1 className='mt-10 text-6xl font-bold tracking-widest text-center uppercase font-flexo animate-fade-down animate-once animate-ease-in-out'><span className='text-transparent bg-clip-text bg-gradient-to-b from-amber-400 to-orange-500'>PokeChang</span></h1>
       <section className='flex flex-col items-center justify-center max-w-full gap-4 p-5 lg:flex lg:flex-row lg:gap-5 lg:items-end lg:w-full'>
         <SearchBar />
         <FilterType />
       </section>
-      <div className='flex flex-col max-w-3xl p-5 mx-auto lg:max-w-full'>
+      <div className='flex flex-col max-w-3xl p-5 mx-auto lg:max-w-full animate-fade-up animate-once animate-duration-[3000ms] animate-delay-500'>
         <ul className='grid items-start grid-cols-1 gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6'>
           {
             filteredPokemon && loadingAllPokemon

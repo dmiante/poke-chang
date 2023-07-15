@@ -9,7 +9,7 @@ export function FilterType () {
     <Listbox value={selectedType} onChange={setSelected}>
       <div className='relative w-full lg:w-1/5'>
         <Listbox.Button
-          className='relative w-full py-3.5 pl-5 pr-10 text-left bg-white border rounded-full shadow-sm border-amber-300 focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'
+          className='relative w-full py-3.5 pl-5 pr-10 text-left bg-white border rounded-full shadow-sm border-amber-300 focus:ring-4 focus:outline-none focus:ring-amber-400'
         >
           <span className='block uppercase truncate'>{selectedType.name}</span>
           <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
