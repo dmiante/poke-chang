@@ -3,16 +3,16 @@ import { getEvolutionChain } from '../services/getEvolutionChain'
 
 export default function useEvolutionChain ({ name }) {
   const [evolution, setEvolution] = useState({})
-  const [loading, setLoading] = useState(false)
+  const [loadingEvolution, setLoadingEvolution] = useState(false)
 
-  // load pokemon
+  // load pokemon evolution
   useEffect(() => {
     async function loadPokemon () {
       try {
-        setLoading(true)
+        setLoadingEvolution(true)
         const newPoke = await getEvolutionChain({ name })
         setEvolution(newPoke)
-        setLoading(false)
+        setLoadingEvolution(false)
       } catch (error) {
         throw new Error(error)
       }
@@ -20,5 +20,5 @@ export default function useEvolutionChain ({ name }) {
     loadPokemon()
   }, [name, setEvolution])
 
-  return { evolution, loading }
+  return { evolution, loadingEvolution }
 }

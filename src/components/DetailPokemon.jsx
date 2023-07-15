@@ -8,10 +8,12 @@ import { usePokeByName } from '../hooks/usePokeByName'
 import { backgroundTypes, baseStatsNames, maxStat } from '../conts'
 import { ArrowLeft, ArrowRight, HomeIcon } from '../assets/Icons'
 import { SearchBar } from './SearchBar'
+import useEvolutionChain from '../hooks/useEvolutionChain'
 
 export default function DetailPokemon () {
   const { name } = useParams()
   const { pokemon, loading } = usePokeByName({ name })
+  const { evolution, loadingEvolution } = useEvolutionChain({ name })
   const imgSrc = pokemon?.sprites?.other['official-artwork']?.front_default
   const { data } = usePalette(imgSrc, 2, 'hex', { crossOrigin: 'anonymous', quality: 10 })
 
@@ -24,7 +26,6 @@ export default function DetailPokemon () {
       <div className='grid grid-cols-2 grid-rows-2 gap-2 my-10 lg:grid-rows-1 lg:grid-cols-3'>
         <Link
           className='inline-flex items-center justify-center col-span-2 gap-2 my-5 text-xl font-semibold underline underline-offset-4 lg:col-auto lg:no-underline lg:text-2xl lg:mt-0'
-          // onClick={() => navigate('/')}
           to='/'
         >
           <HomeIcon />
@@ -35,10 +36,6 @@ export default function DetailPokemon () {
         </Link>
         <Link
           className='inline-flex items-center justify-start row-start-2 text-xl font-semibold transition duration-300 rounded-md group lg:row-auto lg:order-first lg:rounded-full'
-          // className='inline-block transition duration-300 group lg:order-first lg:block'
-          // disabled:hover:bg-amber-200 disabled:cursor-not-allowed
-          // disabled={pokemon.id === 1}
-          // onClick={() => navigate(`/${pokemon.id - 1}`)}
           to={pokemon.id !== 1 ? `/${pokemon.id - 1}` : ''}
         >
           <ArrowLeft />
@@ -49,7 +46,6 @@ export default function DetailPokemon () {
         </Link>
         <Link
           className='inline-flex items-center justify-end row-start-2 text-xl font-semibold rounded-md lg:row-auto lg:rounded-full'
-          // onClick={() => navigate(`/${pokemon.id + 1}`)}
           to={`/${pokemon.id + 1}`}
         >
           <div className='transition duration-300 group'>
@@ -70,7 +66,10 @@ export default function DetailPokemon () {
                   <aside className='flex flex-col basis-1/2 lg:w-1/2'>
                     <h4 className='mx-2 lg:text-lg'>#{pokemon.id}</h4>
                     <div className='flex items-start justify-between mx-2'>
-                      <h2 className='text-3xl font-bold capitalize'>{pokemon.name}</h2>
+                      <div>
+                        <h2 className='text-3xl font-bold capitalize'>{pokemon.name}</h2>
+                        <p>{!loadingEvolution && evolution.category}</p>
+                      </div>
                       <ul className='flex flex-col gap-1 lg:gap-2 lg:flex-row'>
                         {
                           pokemon?.types?.map(type => (
@@ -86,7 +85,6 @@ export default function DetailPokemon () {
                       </ul>
                     </div>
                     <div
-                      // className='flex items-center justify-center py-4 mx-2 my-8 rounded-full lg:p-44'
                       className='flex items-center justify-center lg:mt-20'
                     >
                       <div
