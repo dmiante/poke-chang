@@ -57,7 +57,6 @@ export function SearchBar () {
                       displayValue={(name) => name}
                       onChange={onChange}
                       autoComplete='off'
-                        // onBlur={() => { setNamePokemon('') || setSelected('') }}
                       onKeyDown={onKeyDownEnter}
                     />
                   </div>

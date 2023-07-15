@@ -18,9 +18,6 @@ export const LoaderItem = () => (
 )
 
 export const LoaderGrid = () => {
-  // Get values from props
-  // const { rows, columns, coverHeight, coverWidth, padding, speed } = props;
-
   // Hardcoded values
   const rows = 2
   const columns = 5

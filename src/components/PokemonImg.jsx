@@ -19,7 +19,6 @@ export const PokemonImg = ({ name, alt, className, width, height }) => {
     }
   }, [pokemon, loading])
 
-  // console.log(image)
   return (
     <img
       className={className}
