@@ -110,7 +110,7 @@ export default function EvolutionSection ({ name }) {
               </ul>
               )
             : (
-              <p>No data</p>
+              <p>No info</p>
               )
         }
       </div>

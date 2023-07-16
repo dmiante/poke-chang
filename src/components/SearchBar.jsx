@@ -21,13 +21,13 @@ export function SearchBar () {
 
   function handleSubmit (e) {
     e.preventDefault()
-    navigate(`/${namePokemon}`)
+    navigate(`/${namePokemon.toLowerCase()}`)
   }
 
   function onKeyDownEnter (e) {
     if (!isNaN(namePokemon)) {
       if (e.code === 'Enter') {
-        navigate(`/${namePokemon}`)
+        navigate(`/${namePokemon.toLowerCase()}`)
       }
     }
   }
