@@ -14,7 +14,7 @@ export function PokemonItem ({ url }) {
           ? (
             <Link
               to={`/${dataPokemon.name}`}
-              className='flex flex-col items-center justify-center gap-3 py-0 duration-500 transform rounded-lg cursor-pointer hover:-translate-y-2 hover:shadow-2xl'
+              className='flex flex-col items-center justify-center py-0 duration-500 transform rounded-lg cursor-pointer gap-7 hover:-translate-y-2 hover:shadow-2xl'
             >
               <div
                 className='rounded-lg'
@@ -27,11 +27,11 @@ export function PokemonItem ({ url }) {
                   className='scale-90'
                 />
               </div>
-              <div className='flex justify-between w-full px-4 my-5'>
+              <div className='flex justify-between w-full gap-1 px-2 mb-5'>
                 <div className='flex flex-col justify-between'>
                   <p className='text-lg font-medium'>#{dataPokemon?.id}</p>
                   <h2
-                    className='text-2xl font-normal capitalize font-flexo'
+                    className='text-xl font-normal capitalize font-flexo'
                   >
                     {dataPokemon?.name}
                   </h2>
