@@ -1,23 +1,22 @@
 import { useEffect, useState } from 'react'
-import { usePokeByName } from '../hooks/usePokeByName'
+import { getPokeByName } from '../services/getPokeByName'
 
 export const PokemonImg = ({ name, alt, className, width, height }) => {
-  const { pokemon, loading } = usePokeByName({ name })
   const [image, setImage] = useState('')
 
   useEffect(() => {
     try {
       const imageUrl = async () => {
-        const url = await setImage(pokemon?.sprites?.front_default)
-        return url
+        const resp = await getPokeByName({ name })
+        const { sprites } = resp.data
+        const url = setImage(sprites?.front_default)
+        return { url }
       }
-      if (!loading) {
-        imageUrl()
-      }
+      imageUrl()
     } catch (error) {
       throw new Error(error)
     }
-  }, [pokemon, loading])
+  }, [name])
 
   return (
     <img

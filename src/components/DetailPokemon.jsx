@@ -13,10 +13,11 @@ import useEvolutionChain from '../hooks/useEvolutionChain'
 export default function DetailPokemon () {
   const { name } = useParams()
   const { pokemon, loading } = usePokeByName({ name })
-  const { evolution, loadingEvolution } = useEvolutionChain({ name })
+  const { evolution } = useEvolutionChain({ name })
   const imgSrc = pokemon?.sprites?.other['official-artwork']?.front_default
   const { data } = usePalette(imgSrc, 2, 'hex', { crossOrigin: 'anonymous', quality: 10 })
 
+  console.log(evolution)
   return (
     <div>
       <div>
@@ -68,7 +69,7 @@ export default function DetailPokemon () {
                     <div className='flex items-start justify-between mx-2'>
                       <div>
                         <h2 className='text-3xl font-bold capitalize'>{pokemon.name}</h2>
-                        <p>{evolution && loadingEvolution ? evolution.category : ''}</p>
+                        <p>{evolution ? evolution.category : ''}</p>
                       </div>
                       <ul className='flex flex-col gap-1 lg:gap-2 lg:flex-row'>
                         {

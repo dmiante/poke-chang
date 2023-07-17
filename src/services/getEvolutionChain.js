@@ -1,6 +1,6 @@
 const BASE_URL = 'https://pokeapi.co/api/v2/'
 
-export async function getEvolutionChain ({ name }) {
+export async function getEvolutionChain ({ name = '' } = {}) {
   try {
     const response = await fetch(`${BASE_URL}pokemon-species/${name.toLowerCase()}`)
     if (!response.ok) {
