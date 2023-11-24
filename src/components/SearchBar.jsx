@@ -21,13 +21,13 @@ export function SearchBar () {
 
   function handleSubmit (e) {
     e.preventDefault()
-    navigate(`/${namePokemon.toLowerCase()}`)
+    navigate(`/pokemon/${namePokemon.toLowerCase()}`)
   }
 
   function onKeyDownEnter (e) {
     if (!isNaN(namePokemon)) {
       if (e.code === 'Enter') {
-        navigate(`/${namePokemon.toLowerCase()}`)
+        navigate(`/pokemon/${namePokemon.toLowerCase()}`)
       }
     }
   }
@@ -72,6 +72,7 @@ export function SearchBar () {
                         display && listSuggestion.length !== 0
                           ? (
                               listSuggestion.map((name) => (
+                                // console.log(name)
                                 <Combobox.Option
                                   key={name}
                                   className={({ active }) =>
@@ -79,7 +80,7 @@ export function SearchBar () {
                                     active ? 'bg-amber-400 text-white' : 'text-gray-900'
                                   }`}
                                   value={name}
-                                  onClick={() => navigate(`/${name}`)}
+                                  onClick={() => navigate(`/pokemon/${name.toLowerCase()}`)}
                                 >
                                   {({ selected, active }) => (
                                     <>
