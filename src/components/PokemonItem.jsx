@@ -13,7 +13,7 @@ export function PokemonItem ({ url }) {
         dataPokemon && !loading && data
           ? (
             <Link
-              to={`/${dataPokemon.name}`}
+              to={`/pokemon/${dataPokemon.name}`}
               className='flex flex-col items-center justify-center py-0 duration-500 transform rounded-lg cursor-pointer gap-7 hover:-translate-y-2 hover:shadow-2xl'
             >
               <div

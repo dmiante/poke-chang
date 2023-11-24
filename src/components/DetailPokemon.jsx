@@ -36,7 +36,7 @@ export default function DetailPokemon () {
         </Link>
         <Link
           className='inline-flex items-center justify-start row-start-2 text-xl font-semibold transition duration-300 rounded-md group lg:row-auto lg:order-first lg:rounded-full'
-          to={pokemon.id !== 1 ? `/${pokemon.id - 1}` : ''}
+          to={pokemon.id !== 1 ? `/pokemon/${pokemon.id - 1}` : ''}
         >
           <ArrowLeft />
           <div className='transition duration-300 group'>
@@ -46,7 +46,7 @@ export default function DetailPokemon () {
         </Link>
         <Link
           className='inline-flex items-center justify-end row-start-2 text-xl font-semibold rounded-md lg:row-auto lg:rounded-full'
-          to={`/${pokemon.id + 1}`}
+          to={`/pokemon/${pokemon.id + 1}`}
         >
           <div className='transition duration-300 group'>
             Next Pokemon

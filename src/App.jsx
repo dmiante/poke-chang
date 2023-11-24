@@ -12,7 +12,7 @@ function App () {
         <PokemonProvider>
           <Routes>
             <Route path='/' element={<ListPokemon />} />
-            <Route path='/:name' element={<DetailPokemon />} />
+            <Route path='/pokemon/:name' element={<DetailPokemon />} />
             <Route path='*' element={<h2>Not Found</h2>} />
           </Routes>
         </PokemonProvider>
