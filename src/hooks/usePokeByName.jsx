@@ -11,9 +11,7 @@ export function usePokeByName ({ name }) {
       try {
         setLoading(true)
         const newPoke = await getPokeByName({ name })
-        // console.log(newPoke?.data)
         const { data } = newPoke
-        // console.log(data)
         setPokemon(data)
         setLoading(false)
       } catch (error) {

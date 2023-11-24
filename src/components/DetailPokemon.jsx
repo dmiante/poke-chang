@@ -17,7 +17,6 @@ export default function DetailPokemon () {
   const imgSrc = pokemon?.sprites?.other['official-artwork']?.front_default
   const { data } = usePalette(imgSrc, 2, 'hex', { crossOrigin: 'anonymous', quality: 10 })
 
-  console.log(evolution)
   return (
     <div>
       <div>
